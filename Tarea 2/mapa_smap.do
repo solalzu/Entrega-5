@@ -55,8 +55,11 @@ describe
 
 /* Importamos y transformamos los datos de Excel a formato Stata */
 import delimited "$DATA/mps-recordedcrime-borough.csv", clear 
-* En Stata necesitamos que la variable tenga el mismo nombre en ambas bases para juntarlas
+
+* Nos quedamos unicamente con los thefts
 keep if crimetype=="Theft & Handling"
+
+* En Stata necesitamos que la variable tenga el mismo nombre en ambas bases para juntarlas
 rename borough name /*cambiamos el nombre de la variable borough por name*/
 * preserve /*sirve por si queremos volver atrás una vez que utilizamos collapse*/
 collapse (sum) crimecount, by(name)
@@ -73,6 +76,7 @@ merge 1:1 name using crime1.dta
 *keep if _m==3
 drop _m
 
+* Cambiamos el nombre de crimecount por theft
 rename crimecount theft
 
 save london_thefts_shp.dta, replace
