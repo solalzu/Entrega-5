@@ -4,7 +4,7 @@
 
 /* 
 
-Do-file modificado a partir de la clase tutorial de "Herramientas computacionales para la Investigación" dictada por Amelia Gibbons en la Universidad de San Andrés (UdeSA)
+Do-file modificado a partir de la clase "Herramientas computacionales para la Investigación" dictada por Amelia Gibbons en la Universidad de San Andrés (UdeSA)
 
 Tutorial basado en "Econometría Espacial usando Stata. Guía Teórico-Aplicada"	 					 
 Autor: Marcos Herrera (CONICET-IELDE, UNSa, Argentina)
