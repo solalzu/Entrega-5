@@ -89,11 +89,10 @@ use london_thefts_shp.dta, clear
 
 * Generamos una variable intensiva: cant de crímenes (thefts) cada 10 mil habitantes
 
-gen theft_pop=(theft/Pop_2001)*10000
+gen theft_pop=(theft/Pop_2001)*100000
 
 * Mapa de cuantiles:
 
-spmap theft_pop using coord_ls, id(id) clmethod(q) cln(6) title("Número de robos cada 10 mil habitantes") legend(size(medium) position(5) xoffset(17.05)) fcolor(Blues) plotregion(margin(b+20)) ndfcolor(gs8) ndlabel("No data") name(g1,replace) note("Nota: fueron seleccionados los crímenes clasificados como 'Theft & Handling'") 
-
+spmap theft_pop using coord_ls, id(id) clmethod(q) cln(6) title("Thefts in London") subtitle("per 100.000 inhabitants") legend(size(small) position(5) xoffset(17.05)) fcolor(Blues) plotregion(margin(b+20)) ndfcolor(gs8) ndlabel("No data") name(g1,replace)  
 
 
