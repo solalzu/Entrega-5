@@ -1,12 +1,12 @@
 ################
-#   Gr·ficos   #
+#   Gr√°ficos   #
 ################
 
 
 '
-Script modificado a partir de la clase tutorial de 
-"Herramientas computacionales para la InvestigaciÛn"
-dictada por Amelia Gibbons en la Universidad de San AndrÈs.
+Script modificado a partir de la clase 
+"Herramientas computacionales para la Investigaci√≥n"
+dictada por Amelia Gibbons en la Universidad de San Andr√©s.
 '
 
 '
