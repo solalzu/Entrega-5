@@ -4,7 +4,7 @@
 
 /* 
 
-Do-file modificado a partir de la clase "Herramientas computacionales para la Investigación" dictada por Amelia Gibbons en la Universidad de San Andrés (UdeSA)
+Do-file modificado a partir de la clase tutorial de "Herramientas computacionales para la Investigación" dictada por Amelia Gibbons en la Universidad de San Andrés (UdeSA)
 
 Tutorial basado en "Econometría Espacial usando Stata. Guía Teórico-Aplicada"	 					 
 Autor: Marcos Herrera (CONICET-IELDE, UNSa, Argentina)
@@ -56,37 +56,40 @@ describe
 /* Importamos y transformamos los datos de Excel a formato Stata */
 import delimited "$DATA/mps-recordedcrime-borough.csv", clear 
 * En Stata necesitamos que la variable tenga el mismo nombre en ambas bases para juntarlas
+keep if crimetype=="Theft & Handling"
 rename borough name /*cambiamos el nombre de la variable borough por name*/
 * preserve /*sirve por si queremos volver atrás una vez que utilizamos collapse*/
 collapse (sum) crimecount, by(name)
 *restore
-save "crime.dta", replace
+save "crime1.dta", replace
 
 describe
 
 /* Uniremos ambas bases: london_sport y crime. Su usa la función merge con la variable name que se encuentra en ambas bases */
 
 use ls, clear
-merge 1:1 name using crime.dta
+merge 1:1 name using crime1.dta
 *merge 1:1 name using crime.dta, keep(3) nogen
 *keep if _m==3
 drop _m
 
-save london_crime_shp.dta, replace
+rename crimecount theft
+
+save london_thefts_shp.dta, replace
 
 *************************************
 * Representación por medio de mapas *
 *************************************
 
-use london_crime_shp.dta, clear
+use london_thefts_shp.dta, clear
 
 * Generamos una variable intensiva: cant de crímenes (thefts) cada 10 mil habitantes
 
-gen theft_pop=(crimecount/Pop_2001)*10000
+gen theft_pop=(theft/Pop_2001)*10000
 
 * Mapa de cuantiles:
 
-spmap theft_pop using coord_ls, id(id) clmethod(q) cln(6) title("Número de crímenes cada 10 mil habitantes") legend(size(medium) position(5) xoffset(17.05)) fcolor(Oranges) plotregion(margin(b+20)) ndfcolor(gs8) ndlabel("No data") name(g1,replace) note("Nota: La variable crimen es medida como el número de robos") 
+spmap theft_pop using coord_ls, id(id) clmethod(q) cln(6) title("Número de robos cada 10 mil habitantes") legend(size(medium) position(5) xoffset(17.05)) fcolor(Oranges) plotregion(margin(b+20)) ndfcolor(gs8) ndlabel("No data") name(g1,replace) note("Nota: fueron seleccionados los crímenes clasificados como 'Theft & Handling'") 
 
 
 
